@@ -1,4 +1,17 @@
 from pathlib import Path
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    # В этой переменной будет значение для вашего проекта.
+    dsn="https://9d35be7157ff55119135b23490002839@o4507445140062208.ingest.de.sentry.io/4507445143994448",
+
+    integrations=[
+        DjangoIntegration(),
+    ],
+    traces_sample_rate=1.0,
+    send_default_pii=True
+) 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -7,7 +20,8 @@ SECRET_KEY = 'django-insecure-j_89af+30&&4qm*8z9_(^zz8p4-ho8z_m6ylm0s$h!-p@on1_^
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['158.160.4.212','127.0.0.1', 'localhost', 'k1k0.webhop.me'] 
+
 
 
 # Application definition
@@ -103,9 +117,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-
-# Default primary key field type
+STATIC_URL = '/static_backend/'
+# Укажите директорию, куда бэкенд-приложение должно сложить статику.
+STATIC_ROOT = BASE_DIR / 'static_backend'# Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
